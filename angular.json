@@ -5,6 +5,11 @@
   "projects": {
     "@ngnomads/material-plus": {
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/ngnomads/material-plus",
       "sourceRoot": "projects/ngnomads/material-plus/src",
       "prefix": "lib",
@@ -12,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngnomads/material-plus/ng-package.json"
+            "project": "projects/ngnomads/material-plus/ng-package.json",
           },
           "configurations": {
             "production": {
@@ -32,6 +37,36 @@
               "zone.js",
               "zone.js/testing"
             ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ngnomads/material-plus/.storybook",
+            "browserTarget": "@ngnomads/material-plus:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ngnomads/material-plus"
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ngnomads/material-plus/.storybook",
+            "browserTarget": "@ngnomads/material-plus:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ngnomads/material-plus"
+            ],
+            "outputDir": "dist/storybook/@ngnomads/material-plus"
           }
         }
       }
